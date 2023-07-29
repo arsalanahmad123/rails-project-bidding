@@ -1,0 +1,14 @@
+<div class="flex justify-center items-center mt-32 flex-col">
+  <div class="bg-slate-800">
+    <h1 class="text-3xl dark:text-white font-bold"><%= @project.title %></h1>
+    <small class="dark:text-white">Created by <%= @project.user.username %></small>
+    <div class="mt-12 flex flex-col">
+      <img class="w-[600px] h-[600px] mx-auto pb-20 rounded" src="<%= @project.image.url %>">
+      <span class="dark:text-white font-medium w-[600px] mx-auto pb-24">
+        <%= @project.description %>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur commodi, nulla tempora velit quod aliquam in nostrum eligendi vitae veniam!
+      </span>
+    </div>
+  </div>
+  <button class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring focus:border-blue-300">Bid</button>
+</div>
