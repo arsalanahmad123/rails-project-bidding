@@ -6,4 +6,8 @@ Rails.application.routes.draw do
   post "users/login",to: "sessions#create",as: 'create_session'
   delete "users/logout",to: "sessions#destroy",as: 'destroy_session'
   resources :projects
+
+
+
+  match '*path', to: 'errors#not_found', via: :all
 end
