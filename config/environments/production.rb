@@ -94,6 +94,7 @@ Rails.application.configure do
 Rails.application.configure do
   config.eager_load = false
   # Other configurations...
+  config.hosts << "team-198-production.up.railway.app"
 end
 
 end
