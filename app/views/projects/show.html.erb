@@ -14,17 +14,21 @@
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur commodi, nulla tempora velit quod aliquam in nostrum eligendi vitae veniam!
       </span>
     </div>
-    <div class="mt-12 mb-12">
+    <div class="mt-12 mb-12" id="bids">
+      <%= turbo_stream_from "bids" %>
       <% @bids.each do |bid| %>
         <%= render 'projects/bid', bid: bid %>
       <% end %>
     </div>
   </div>
-  <% if current_user && !check_user_bid(@project) && current_user.buyer? && @project.bid_time < DateTime.now %>
+  <% if current_user && !check_user_bid(@project) && current_user.buyer? && @project.bid_time > DateTime.now %>
     <div class="pt-12 pb-32 w-[600px] ">
       <%= turbo_frame_tag "bid-form" do %>
         <%= link_to "Bid Now",new_project_bid_path(@project),class:"bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring focus:border-blue-300" %>
       <% end %>
     </div>
+  <% end %>
+  <% if @project.bid_time < DateTime.now %>
+    <marquee class="text-red-500" behavior="scroll" direction="left">Bid has expired</marquee>
   <% end %>
 </div>
