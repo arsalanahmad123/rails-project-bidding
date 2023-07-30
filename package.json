@@ -5,9 +5,12 @@
     "@hotwired/stimulus": "^3.2.1",
     "@hotwired/turbo-rails": "^7.3.0",
     "esbuild": "^0.18.17",
-    "flowbite": "^1.7.0"
+    "flowbite": "^1.7.0",
+    "postcss": "^8.4.27",
+    "tailwindcss": "^3.3.3"
   },
   "scripts": {
-    "build": "esbuild app/javascript/*.* --bundle --sourcemap --outdir=app/assets/builds --public-path=/assets"
+    "build": "esbuild app/javascript/*.* --bundle --sourcemap --outdir=app/assets/builds --public-path=/assets",
+    "build:css": "tailwind build -i app/assets/stylesheets/application.tailwind.css -o public/assets/output.css"
   }
 }
