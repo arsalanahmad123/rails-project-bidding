@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_29_135439) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_30_135256) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -39,6 +39,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_29_135439) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "bids", force: :cascade do |t|
+    t.decimal "amount"
+    t.integer "project_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.index ["project_id"], name: "index_bids_on_project_id"
+  end
+
   create_table "projects", force: :cascade do |t|
     t.string "title"
     t.text "description"
@@ -47,6 +56,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_29_135439) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "rating"
+    t.string "url"
     t.index ["user_id"], name: "index_projects_on_user_id"
   end
 
@@ -62,5 +72,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_29_135439) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "bids", "projects"
   add_foreign_key "projects", "users"
 end

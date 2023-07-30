@@ -10,8 +10,8 @@
       <%= form.text_area :description, class: "form-textarea w-full py-2 px-4 border rounded-lg focus:outline-none focus:ring focus:border-blue-300", required: true %>
     </div>
     <div class="mb-6">
-      <%= form.label :image, class: "block text-gray-700 text-sm font-bold mb-2" %>
-      <%= form.file_field :image, class: "form-input w-full py-2 px-4 border rounded-lg focus:outline-none focus:ring focus:border-blue-300", required: true %>
+      <%= form.label :project_url, class: "block text-gray-700 text-sm font-bold mb-2" %>
+      <%= form.text_field :url, class: "form-input w-full py-2 px-4 border rounded-lg focus:outline-none focus:ring focus:border-blue-300", required: true %>
     </div>
     <div class="flex justify-end">
       <%= form.submit "Submit", class: "bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring focus:border-blue-300" %>

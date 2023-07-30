@@ -5,7 +5,7 @@ class ProjectsController < ApplicationController
 
     def index
         @projects = Project.all 
-    end
+    end 
 
     def show 
     end
@@ -31,7 +31,7 @@ class ProjectsController < ApplicationController
     private 
 
         def project_params
-            params.require(:project).permit(:title, :description, :image)
+            params.require(:project).permit(:title, :description, :url)
         end
 
         def set_project

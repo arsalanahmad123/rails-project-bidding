@@ -5,4 +5,5 @@ class User < ApplicationRecord
     validates :password_confirmation, presence: true
     has_many :projects 
     enum role: [:buyer,:seller,:admin]
+    has_many :bids, dependent: :destroy
 end

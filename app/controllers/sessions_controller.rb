@@ -9,11 +9,11 @@ class SessionsController < ApplicationController
         @user = User.find_by(email: params[:email])
         if @user && @user.authenticate(params[:password]) 
             login(@user)
-            flash.now[:notice] = "You have successfully logged in"
-            redirect_to root_path
+            flash[:success] = "You have successfully logged in"
+            redirect_to projects_path
         else 
-            flash.now[:danger] = "Invalid email/password"
-            render :new
+            flash[:danger] = "Invalid email/password"
+            redirect_to login_path
         end
     end
 

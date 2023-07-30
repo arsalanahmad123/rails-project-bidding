@@ -3,12 +3,18 @@
     <h1 class="text-3xl dark:text-white font-bold"><%= @project.title %></h1>
     <small class="dark:text-white">Created by <%= @project.user.username %></small>
     <div class="mt-12 flex flex-col">
-      <img class="w-[600px] h-[600px] mx-auto pb-20 rounded" src="<%= @project.image.url %>">
-      <span class="dark:text-white font-medium w-[600px] mx-auto pb-24">
+      <img class="w-[600px] h-[600px] mx-auto pb-20 rounded border border-white" src="<%= @project.url %>">
+      <span class="dark:text-white font-medium w-[600px] mx-auto pb-24 pt-10">
         <%= @project.description %>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur commodi, nulla tempora velit quod aliquam in nostrum eligendi vitae veniam!
       </span>
     </div>
   </div>
-  <button class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring focus:border-blue-300">Bid</button>
+  <% if current_user && !check_user_bid %>
+    <div class="pt-12 pb-32 w-[600px] ">
+      <%= turbo_frame_tag "bid-form" do %>
+        <%= link_to "Bid Now",new_project_bid_path(@project),class:"bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring focus:border-blue-300" %>
+      <% end %>
+    </div>
+  <% end %>
 </div>
