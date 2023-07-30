@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
 
-    helper_method :current_user,:login,:logout,:require_user!
+    helper_method :current_user,:login,:logout,:require_user!,:check_user_bid 
 
 
     def current_user
@@ -21,4 +21,15 @@ class ApplicationController < ActionController::Base
             redirect_to login_path
         end
     end
+
+    def check_user_bid(project) 
+        if current_user
+            if current_user && !current_user.bids.empty?
+                current_user.bids.exists?(project_id: project.id)
+            else
+                false
+            end
+        end
+    end
+
 end

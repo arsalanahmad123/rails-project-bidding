@@ -1,20 +1,33 @@
 <div class="flex justify-center items-center mt-32 flex-col">
   <div class="bg-slate-800">
     <h1 class="text-3xl dark:text-white font-bold"><%= @project.title %></h1>
-    <small class="dark:text-white">Created by <%= @project.user.username %></small>
+    <div class="flex flex-row justify-between items-center mt-3">
+      <small class="dark:text-white">Created by <%= @project.user.username %></small>
+      <small class="dark:text-white">Bid will expire on <span class="bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300"><%= @project.display_datetime if @project.bid_time %></span>
+      </small>
+    </div>
     <div class="mt-12 flex flex-col">
-      <img class="w-[600px] h-[600px] mx-auto pb-20 rounded border border-white" src="<%= @project.url %>">
+      <span class="dark:text-white">Checkout Project here: <br>
+        <a href="<%= @project.url %>" class="text-blue-500 dark:text-blue-400 underline hover:cursor-pointer"><%= @project.url %></a></span>
       <span class="dark:text-white font-medium w-[600px] mx-auto pb-24 pt-10">
         <%= @project.description %>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur commodi, nulla tempora velit quod aliquam in nostrum eligendi vitae veniam!
       </span>
     </div>
+    <div class="mt-12 mb-12">
+      <% @bids.each do |bid| %>
+        <%= render 'projects/bid', bid: bid %>
+      <% end %>
+    </div>
   </div>
-  <% if current_user && !check_user_bid %>
+  <% if current_user && !check_user_bid(@project) && current_user.buyer? && @project.bid_time < DateTime.now %>
     <div class="pt-12 pb-32 w-[600px] ">
       <%= turbo_frame_tag "bid-form" do %>
         <%= link_to "Bid Now",new_project_bid_path(@project),class:"bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring focus:border-blue-300" %>
       <% end %>
     </div>
+  <% end %>
+  <% if @project.bid_time > DateTime.now %>
+    <marquee class="text-2xl text-white">Bid Ended</marquee>
   <% end %>
 </div>

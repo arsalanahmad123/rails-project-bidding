@@ -1,13 +1,15 @@
 class ProjectsController < ApplicationController 
     include ActiveStorage::SetCurrent
     before_action :require_user!, except: %i[index show] 
-    before_action :set_project , only: [:show, :edit, :update, :destroy]
+    before_action :set_project , only: [:show]
+    before_action :check_user_role, only: [:new, :create]
 
     def index
         @projects = Project.all 
     end 
 
     def show 
+        @bids = @project.bids.order("amount DESC")
     end
 
     def new 
@@ -31,11 +33,18 @@ class ProjectsController < ApplicationController
     private 
 
         def project_params
-            params.require(:project).permit(:title, :description, :url)
+            params.require(:project).permit(:title, :description, :url,:bid_time)
         end
 
         def set_project
             @project = Project.find(params[:id])
+        end
+
+        def check_user_role
+            if !current_user.seller?
+                flash[:danger] = "You are not authorized to perform that action"
+                redirect_to root_path
+            end
         end
 
 end

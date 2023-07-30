@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   delete "users/logout",to: "sessions#destroy",as: 'destroy_session'
   resources :projects do 
     resources :bids,only: [:new,:create]
+    resources :ratings,only: [:new,:create]
   end
 
 

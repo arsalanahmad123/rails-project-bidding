@@ -1,4 +1,4 @@
-<div class="max-w-md mx-auto bg-white p-8 shadow-md rounded-lg mt-32">
+<div class="max-w-md mx-auto bg-white p-8 shadow-md rounded-lg mt-32 mb-8">
   <h1 class="text-3xl font-bold mb-6 text-center">New Project</h1>
   <%= form_with(model: @project, url: projects_path, html: { data:{turbo: false} }) do |form| %>
     <div class="mb-6">
@@ -12,6 +12,10 @@
     <div class="mb-6">
       <%= form.label :project_url, class: "block text-gray-700 text-sm font-bold mb-2" %>
       <%= form.text_field :url, class: "form-input w-full py-2 px-4 border rounded-lg focus:outline-none focus:ring focus:border-blue-300", required: true %>
+    </div>
+    <div class="mb-6">
+      <%= form.label :how_much_time_for_project_to_remain_under_bidding?, class: "block text-gray-700 text-sm font-bold mb-2" %>
+      <%= form.datetime_local_field :bid_time, class: "form-input w-full py-2 px-4 border rounded-lg focus:outline-none focus:ring focus:border-blue-300", required: true %>
     </div>
     <div class="flex justify-end">
       <%= form.submit "Submit", class: "bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring focus:border-blue-300" %>

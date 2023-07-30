@@ -13,8 +13,11 @@ class BidsController < ApplicationController
         respond_to do |format|
         if @bid.save
            format.turbo_stream {
-            render turbo_stream: turbo_stream.replace("bid-form", partial: "bids/success")
-           }
+                render turbo_stream: [
+                turbo_stream.replace("bid-form", partial: "bids/success"),
+                turbo_stream.append("bids", partial: "projects/bid", locals: { bid: @bid })
+                ]
+            }
            format.html { redirect_to project_path(@project) }
         else
             format.html { render :new, status: :unprocessable_entity }
