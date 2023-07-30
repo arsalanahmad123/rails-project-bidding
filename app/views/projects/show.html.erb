@@ -14,8 +14,7 @@
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur commodi, nulla tempora velit quod aliquam in nostrum eligendi vitae veniam!
       </span>
     </div>
-    <div class="mt-12 mb-12" id="bids">
-      <%= turbo_stream_from "bids" %>
+    <div class="mt-12 mb-12">
       <% @bids.each do |bid| %>
         <%= render 'projects/bid', bid: bid %>
       <% end %>
