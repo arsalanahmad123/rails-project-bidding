@@ -58,6 +58,12 @@ Rails.application.configure do
 
   # Suppress logger output for asset requests.
   config.assets.quiet = true
+  # config/environments/development.rb
+Rails.application.configure do
+  config.eager_load = false
+  # Other configurations...
+end
+
 
 
   # Raises error for missing translations.
