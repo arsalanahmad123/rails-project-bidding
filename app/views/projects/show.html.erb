@@ -8,10 +8,9 @@
     </div>
     <div class="mt-12 flex flex-col">
       <span class="dark:text-white">Checkout Project here: <br>
-        <a href="<%= @project.url %>" class="text-blue-500 dark:text-blue-400 underline hover:cursor-pointer"><%= @project.url %></a></span>
+        <a href="<%= @project.url %>" class="text-blue-500 dark:text-blue-400 underline hover:cursor-pointer" target="_blank"><%= @project.url %></a></span>
       <span class="dark:text-white font-medium w-[600px] mx-auto pb-24 pt-10">
         <%= @project.description %>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur commodi, nulla tempora velit quod aliquam in nostrum eligendi vitae veniam!
       </span>
     </div>
     <div class="mt-12 mb-12">
@@ -29,5 +28,8 @@
   <% end %>
   <% if @project.bid_time < DateTime.now %>
     <marquee class="text-red-500" behavior="scroll" direction="left">Bid has expired</marquee>
+  <% end %>
+  <% if @project.bid_time < DateTime.now %>
+    <span>Bid sold to : </span>
   <% end %>
 </div>

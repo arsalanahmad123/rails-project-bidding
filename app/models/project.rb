@@ -2,7 +2,7 @@ class Project < ApplicationRecord
   belongs_to :user 
   validates :title, presence: true, length: { minimum: 5 }
   validates :description, presence: true, length: { minimum: 10 }
-  validates :url, presence: true
+  validates :url, presence: true, format: { with: /\A#{URI::regexp(['http', 'https'])}\z/ }
   validates :bid_time, presence: true
   validate :bid_time_cannot_be_in_the_past
   has_many :bids, dependent: :destroy
@@ -35,6 +35,5 @@ class Project < ApplicationRecord
   def display_datetime 
     self.bid_time.strftime("%b %d, %Y at %l:%M %p")
   end
-
 
 end

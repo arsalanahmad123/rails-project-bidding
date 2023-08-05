@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController 
-    include ActiveStorage::SetCurrent
+    before_action :require_admin!,only: [:destroy_expired_bids]
     before_action :require_user!, except: %i[index show] 
     before_action :set_project , only: [:show]
     before_action :check_user_role, only: [:new, :create]
@@ -28,6 +28,14 @@ class ProjectsController < ApplicationController
         end
     end
 
+    def destroy_expired_bids
+        projects = Project.where('bid_time <= ?', DateTime.now)
+        project_ids = projects.pluck(:id)
+        BidsJob.perform_at(1.minute.from_now,project_ids)
+    end
+
+    
+
 
 
     private 
@@ -42,6 +50,13 @@ class ProjectsController < ApplicationController
 
         def check_user_role
             if !current_user.seller?
+                flash[:danger] = "You are not authorized to perform that action"
+                redirect_to root_path
+            end
+        end
+
+        def require_admin!
+            if !current_user.admin?
                 flash[:danger] = "You are not authorized to perform that action"
                 redirect_to root_path
             end

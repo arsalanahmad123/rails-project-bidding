@@ -4,11 +4,11 @@
     Discover the magic of collaboration as you explore a medley of projects, crafted by our skilled mentors, united by their vision for extraordinary creations.
   </p>
 </div>
-<div class="flex justify-center items-center mt-32">
-  <% @projects.each do |project|  %>
+<div class="flex justify-center items-center my-32 gap-x-5">
+  <% @projects.each_with_index do |project,index|  %>
     <div class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-      <a href="<%= project_path(project) %>">
-        <img src="<%= project.url %>" alt="Project image",class="p-8 rounded-t-lg rounded-b-lg">
+      <a href="<%= project_path(project) %>" class="text-white text-3xl flex justify-center mb-10 border-b border-slate-300">
+        Project-<%= index+1 %>
       </a>
       <div class="px-5 pb-5">
         <h5 class="text-xl font-semibold tracking-tight text-gray-900 dark:text-white"><%= project.title %></h5>
@@ -21,3 +21,6 @@
     </div>
   <% end %>
 </div>
+<% if current_user && current_user.admin? %>
+  <%= button_to "Delete Expired Bids",delete_all_expired_bids_path,remote: true,method: :post,class:"bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring focus:border-blue-300" %>
+<% end%>

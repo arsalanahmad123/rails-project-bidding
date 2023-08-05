@@ -78,3 +78,4 @@ end
 gem "tailwindcss-rails", "~> 2.0"
 gem "bcrypt"
 gem 'phonelib'
+gem "sidekiq", "~> 7.1"
