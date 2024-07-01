@@ -1,7 +1,7 @@
 class ProjectsController < ApplicationController 
     before_action :require_admin!,only: [:destroy_expired_bids]
     before_action :require_user!, except: %i[index show] 
-    before_action :set_project , only: [:show]
+    before_action :set_project , only: [:show,:destroy]
     before_action :check_user_role, only: [:new, :create]
 
     def index
@@ -34,7 +34,11 @@ class ProjectsController < ApplicationController
         BidsJob.perform_at(1.minute.from_now,project_ids)
     end
 
-    
+    def destroy 
+        @project.destroy
+        flash[:success] = "Project was successfully deleted"
+        redirect_to projects_path
+    end
 
 
 

@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get "users/login",to: "sessions#new",as: 'login'
   post "users/login",to: "sessions#create",as: 'create_session'
   delete "users/logout",to: "sessions#destroy",as: 'destroy_session'
+  get "users/:id",to: "users#show",as: 'user'
   resources :projects do 
     resources :bids,only: [:new,:create]
   end

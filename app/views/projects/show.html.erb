@@ -1,5 +1,8 @@
 <div class="flex justify-center items-center mt-32 flex-col">
   <div class="bg-slate-800">
+    <% if current_user && current_user.id == @project.user_id || @project.user.admin? %>
+      <%= link_to "Remove Project From Bidding?", project_path(@project),data: {turbo_method: "delete",turbo_confirm: "Are you sure you want to remove the project from bidding, once done you can't undo it...."}, class: "bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:border-red-300 flex justify-center items-center mb-5" %>
+    <% end %>
     <h1 class="text-3xl dark:text-white font-bold"><%= @project.title %></h1>
     <div class="flex flex-row justify-between items-center mt-3">
       <small class="dark:text-white">Created by <%= @project.user.username %></small>
